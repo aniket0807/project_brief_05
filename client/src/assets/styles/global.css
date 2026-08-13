@@ -1,0 +1,50 @@
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Default Font and Background */
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 16px;
+}
+
+/* Main Content */
+main {
+  min-height: 80vh;
+  padding: 24px;
+}
+
+/* Paragraphs */
+p {
+  margin-bottom: 16px;
+}
+
+/* Navbar */
+nav {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  padding: 16px 24px;
+}
+
+/* Footer */
+footer {
+  background-color: var(--secondary-color);
+  color: var(--white-color);
+  padding: 16px 24px;
+  text-align: center;
+}
