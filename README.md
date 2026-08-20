@@ -7,7 +7,7 @@ Inventory Management System
 # Team Members
 
 - Aniket Saha
-- Roshni LamichhANE
+- Roshni Lamichhane
 - Bhoben Sharma
 - Deba Basumatary
 - Vivek Magar
