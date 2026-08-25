@@ -1,0 +1,71 @@
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 18px 40px;
+  background-color: var(--surface-color);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+}
+
+.navbar-brand h2 {
+  margin: 0;
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.navbar-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.navbar-links a:hover {
+  color: var(--text-color);
+}
+
+.active-link {
+  color: var(--primary-color) !important;
+  border-bottom: 2px solid var(--primary-color) !important;
+}
+
+main {
+  flex: 1;
+  padding: 40px;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+footer {
+  padding: 24px;
+  text-align: center;
+  border-top: 1px solid var(--border-color);
+  background-color: var(--surface-color);
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+footer p:first-child {
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 2px;
+}

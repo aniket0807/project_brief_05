@@ -8,8 +8,12 @@ function Dashboard() {
         title="Inventory Dashboard"
         subtitle="Overview of products, stock levels, purchase orders, and inventory status."
       />
-      <Card title="Total Products" description="Coming soon" />
-      <Card title="Low Stock Items" description="Coming soon" />
+      <div className="card-grid">
+        <Card title="Total Products" description="Coming soon" />
+        <Card title="Low Stock Items" description="Coming soon" />
+        <Card title="Total Suppliers" description="Coming soon" />
+        <Card title="Recent Sales" description="Coming soon" />
+      </div>
     </section>
   );
 }

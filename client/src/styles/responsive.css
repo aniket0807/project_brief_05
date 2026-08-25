@@ -1,0 +1,40 @@
+/* Tablet */
+@media (max-width: 768px) {
+  main {
+    padding: 24px 20px;
+  }
+
+  .navbar {
+    padding: 16px 20px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  body {
+    font-size: 0.9rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .navbar-links {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
