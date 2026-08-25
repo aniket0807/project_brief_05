@@ -1,8 +1,9 @@
 function AuthLayout({ children }) {
   return (
-    <main>
+    <div>
+      <p>Auth Layout Placeholder</p>
       {children}
-    </main>
+    </div>
   );
 }
 

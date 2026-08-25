@@ -6,11 +6,9 @@ function MainLayout() {
   return (
     <div>
       <Navbar />
-
       <main>
         <Outlet />
       </main>
-
       <Footer />
     </div>
   );

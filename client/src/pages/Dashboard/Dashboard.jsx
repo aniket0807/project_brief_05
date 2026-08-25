@@ -1,14 +1,15 @@
+import PageTitle from "../../components/ui/PageTitle";
+import Card from "../../components/ui/Card";
+
 function Dashboard() {
   return (
     <section>
-      <h2>Page Title: Dashboard</h2>
-
-      <h1>Inventory Dashboard</h1>
-
-      <p>
-        Placeholder Description: Overview of stock levels, products,
-        purchases, and low-stock items.
-      </p>
+      <PageTitle
+        title="Inventory Dashboard"
+        subtitle="Overview of products, stock levels, purchase orders, and inventory status."
+      />
+      <Card title="Total Products" description="Coming soon" />
+      <Card title="Low Stock Items" description="Coming soon" />
     </section>
   );
 }

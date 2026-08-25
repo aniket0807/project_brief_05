@@ -4,7 +4,6 @@ function Navbar() {
   return (
     <nav>
       <h2>Inventory Management System</h2>
-
       <div>
         <NavLink to="/">Home</NavLink>{" "}
         <NavLink to="/dashboard">Dashboard</NavLink>{" "}

@@ -1,10 +1,12 @@
+import PageTitle from "../../components/ui/PageTitle";
+
 function NotFound() {
   return (
     <section>
-      <h1>404 - Page Not Found</h1>
-      <p>
-        Sorry, the page you are looking for does not exist.
-      </p>
+      <PageTitle
+        title="404 - Page Not Found"
+        subtitle="Sorry, the page you are looking for does not exist."
+      />
     </section>
   );
 }
