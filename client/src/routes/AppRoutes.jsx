@@ -4,6 +4,7 @@ import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import Profile from "../pages/Profile/Profile";
+import ProductEntry from "../pages/Products/ProductEntry";
 import NotFound from "../pages/NotFound/NotFound";
 
 function AppRoutes() {
@@ -13,6 +14,7 @@ function AppRoutes() {
         <Route index element={<Home />} />
         <Route path="login" element={<Login />} />
         <Route path="dashboard" element={<Dashboard />} />
+        <Route path="products/new" element={<ProductEntry />} />
         <Route path="profile" element={<Profile />} />
         <Route path="*" element={<NotFound />} />
       </Route>
