@@ -1,12 +1,14 @@
 import express from "express";
+import requestLogger from "./middleware/requestLogger.js";
+import productRoutes from "./routes/productRoutes.js";
+import testRoutes from "./routes/testRoutes.js";
 
 const app = express();
 
-// Middleware to parse incoming JSON requests
 app.use(express.json());
+app.use(requestLogger);
 
-// Test route (created in Exercise 6)
-import testRoutes from "./routes/testRoutes.js";
 app.use("/api/test", testRoutes);
+app.use("/api/products", productRoutes);
 
 export default app;
