@@ -1,3 +1,5 @@
+import Product from "../models/Product.js"; // will be used for real CRUD in the next sprint
+
 // Temporary in-memory data (no database yet — added in later sprints)
 let products = [
   { id: 1, name: "Wireless Mouse", price: 499, quantity: 50 },
