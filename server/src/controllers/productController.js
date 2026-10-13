@@ -1,97 +1,152 @@
-import Product from "../models/Product.js"; // will be used for real CRUD in the next sprint
+import mongoose from "mongoose";
+import Product from "../models/Product.js";
 
-// Temporary in-memory data (no database yet — added in later sprints)
-let products = [
-  { id: 1, name: "Wireless Mouse", price: 499, quantity: 50 },
-  { id: 2, name: "Keyboard", price: 899, quantity: 30 },
-];
-
-// GET /api/products
-export const getAllProducts = (req, res) => {
-  res.status(200).json({
-    success: true,
-    data: products,
-  });
-};
-
-// GET /api/products/:id
-export const getProductById = (req, res) => {
-  const { id } = req.params;
-  const product = products.find((p) => p.id === Number(id));
-
-  if (!product) {
-    return res.status(404).json({
+// Shared error handler: schema validation errors -> 400, anything else -> 500
+const handleError = (res, error) => {
+  if (error.name === "ValidationError") {
+    const messages = Object.values(error.errors).map((e) => e.message);
+    return res.status(400).json({
       success: false,
-      message: `Product with id ${id} not found`,
+      message: messages.join(", "),
     });
   }
 
-  res.status(200).json({
-    success: true,
-    data: product,
+  res.status(500).json({
+    success: false,
+    message: "Server error",
+    error: error.message,
   });
 };
 
 // POST /api/products
-export const createProduct = (req, res) => {
-  const { name, price, quantity } = req.body;
+export const createProduct = async (req, res) => {
+  try {
+    const { name, category, price, quantity, supplierName, status } = req.body;
 
-  const newProduct = {
-    id: products.length + 1,
-    name,
-    price,
-    quantity,
-  };
+    const product = await Product.create({
+      name,
+      category,
+      price,
+      quantity,
+      supplierName,
+      status,
+    });
 
-  products.push(newProduct);
+    res.status(201).json({
+      success: true,
+      message: "Product created successfully",
+      data: product,
+    });
+  } catch (error) {
+    handleError(res, error);
+  }
+};
 
-  res.status(201).json({
-    success: true,
-    message: "Product created successfully",
-    data: newProduct,
-  });
+// GET /api/products
+export const getAllProducts = async (req, res) => {
+  try {
+    const products = await Product.find().sort({ createdAt: -1 });
+
+    res.status(200).json({
+      success: true,
+      count: products.length,
+      data: products,
+    });
+  } catch (error) {
+    handleError(res, error);
+  }
+};
+
+// GET /api/products/:id
+export const getProductById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!mongoose.isValidObjectId(id)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid product ID",
+      });
+    }
+
+    const product = await Product.findById(id);
+
+    if (!product) {
+      return res.status(404).json({
+        success: false,
+        message: "Product not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: product,
+    });
+  } catch (error) {
+    handleError(res, error);
+  }
 };
 
 // PUT /api/products/:id
-export const updateProduct = (req, res) => {
-  const { id } = req.params;
-  const product = products.find((p) => p.id === Number(id));
+export const updateProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
 
-  if (!product) {
-    return res.status(404).json({
-      success: false,
-      message: `Product with id ${id} not found`,
+    if (!mongoose.isValidObjectId(id)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid product ID",
+      });
+    }
+
+    const product = await Product.findByIdAndUpdate(id, req.body, {
+      new: true, // return the updated document
+      runValidators: true, // apply schema validation to the update
     });
+
+    if (!product) {
+      return res.status(404).json({
+        success: false,
+        message: "Product not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Product updated successfully",
+      data: product,
+    });
+  } catch (error) {
+    handleError(res, error);
   }
-
-  const { name, price, quantity } = req.body;
-  if (name) product.name = name;
-  if (price) product.price = price;
-  if (quantity) product.quantity = quantity;
-
-  res.status(200).json({
-    success: true,
-    message: "Product updated successfully",
-    data: product,
-  });
 };
 
 // DELETE /api/products/:id
-export const deleteProduct = (req, res) => {
-  const { id } = req.params;
-  const exists = products.some((p) => p.id === Number(id));
+export const deleteProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
 
-  if (!exists) {
-    return res.status(404).json({
-      success: false,
-      message: `Product with id ${id} not found`,
+    if (!mongoose.isValidObjectId(id)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid product ID",
+      });
+    }
+
+    const product = await Product.findByIdAndDelete(id);
+
+    if (!product) {
+      return res.status(404).json({
+        success: false,
+        message: "Product not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Product deleted successfully",
     });
+  } catch (error) {
+    handleError(res, error);
   }
-
-  products = products.filter((p) => p.id !== Number(id));
-
-  res.status(200).json({
-    success: true,
-    message: "Product deleted successfully",
-  });
 };
